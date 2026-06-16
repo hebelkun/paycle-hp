@@ -1580,4 +1580,9 @@ section {
     height: 56px;
     justify-content: flex-start;
   }
+
+  .partner-logo img.logo-lg {
+    max-width: 100%;
+    transform: none;
+  }
 }
