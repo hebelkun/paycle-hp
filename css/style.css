@@ -1,0 +1,1408 @@
+/* ==========================================================
+   PAYCLE Corporate Site
+   Minimal, whitespace-driven design with large EN typography
+   ========================================================== */
+
+:root {
+  --bg: #f9faff;       /* ホワイト */
+  --ink: #171718;      /* ブラック */
+  --accent: #30b0c7;   /* メインブルー */
+  --sub: #e2f0fd;      /* サブブルー */
+  --muted: #6b7480;
+  --line: #d4e2ef;
+  --font-en: "Inter", sans-serif;
+  --font-jp: "Noto Sans JP", sans-serif;
+  --pad-x: clamp(20px, 6vw, 96px);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-jp);
+  font-size: 16px;
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  overflow-x: clip;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.sp-only {
+  display: none;
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px var(--pad-x);
+  mix-blend-mode: normal;
+  background: transparent;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.site-header.is-scrolled {
+  background: rgba(249, 250, 255, 0.92);
+  box-shadow: 0 1px 0 var(--line);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+.global-nav {
+  display: flex;
+  gap: clamp(18px, 2.5vw, 36px);
+  font-family: var(--font-en);
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+}
+
+.global-nav a {
+  position: relative;
+  padding: 4px 0;
+}
+
+.global-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.global-nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav-contact {
+  color: var(--accent);
+}
+
+.nav-contact::after {
+  background: var(--accent);
+}
+
+.nav-toggle {
+  display: none;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px var(--pad-x) 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* soft gradient backdrop */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -15%;
+  z-index: 0;
+  background:
+    linear-gradient(to bottom, rgba(249, 250, 255, 1) 12%, rgba(249, 250, 255, 0) 30%),
+    radial-gradient(circle at 18% 36%, rgba(48, 176, 199, 0.35) 0%, rgba(48, 176, 199, 0.14) 22%, transparent 45%),
+    radial-gradient(circle at 78% 32%, rgba(226, 240, 253, 0.95) 0%, rgba(226, 240, 253, 0.45) 25%, transparent 50%),
+    radial-gradient(circle at 68% 78%, rgba(48, 176, 199, 0.18) 0%, rgba(48, 176, 199, 0.08) 24%, transparent 48%),
+    radial-gradient(circle at 28% 88%, rgba(226, 240, 253, 0.8) 0%, rgba(226, 240, 253, 0.35) 22%, transparent 46%);
+  animation: drift 20s ease-in-out infinite alternate;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes drift {
+  to {
+    transform: translate3d(5%, -4%, 0) scale(1.1) rotate(3deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::before,
+  .news::before {
+    animation: none;
+  }
+}
+
+.hero-words {
+  font-family: var(--font-en);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 7.5vw, 6.2rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.hero-words .word {
+  display: block;
+  opacity: 0;
+  transform: translateX(70vw);
+  animation: slide-in 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-words .word:nth-child(1) { animation-delay: 0.1s; }
+.hero-words .word:nth-child(2) { animation-delay: 0.28s; }
+.hero-words .word:nth-child(3) { animation-delay: 0.46s; }
+.hero-words .word:nth-child(4) { animation-delay: 0.64s; }
+.hero-words .word:nth-child(5) { animation-delay: 0.82s; }
+
+.hero-words .outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent);
+}
+
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(70vw);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-copy {
+  margin-top: clamp(28px, 4vw, 48px);
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+  font-weight: 500;
+  opacity: 0;
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.7s forwards;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 28px;
+  right: var(--pad-x);
+  font-family: var(--font-en);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  writing-mode: vertical-rl;
+}
+
+/* ---------- Shared section styles ---------- */
+
+section {
+  padding: clamp(80px, 12vw, 160px) var(--pad-x);
+}
+
+.section-label {
+  font-family: var(--font-en);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+
+.section-label.light {
+  color: var(--accent);
+}
+
+.section-title-en {
+  font-family: var(--font-en);
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin-bottom: clamp(36px, 5vw, 64px);
+}
+
+.section-title-en.light {
+  color: #fff;
+}
+
+.text-link {
+  display: inline-block;
+  margin-top: 40px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 4px;
+  transition: opacity 0.25s ease;
+}
+
+.text-link:hover {
+  opacity: 0.5;
+}
+
+.text-link.light {
+  color: #fff;
+  border-color: #fff;
+}
+
+/* scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Intro ---------- */
+
+.intro-text {
+  max-width: 38em;
+  font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+  font-weight: 500;
+  line-height: 2.1;
+}
+
+/* ---------- Services ---------- */
+
+.services {
+  background: #f0f7fe;
+}
+
+.service-list {
+  border-top: 1px solid var(--line);
+}
+
+.service-list li {
+  border-bottom: 1px solid var(--line);
+}
+
+.service-list a {
+  display: grid;
+  grid-template-columns: 3.5em 1fr;
+  grid-template-areas:
+    "num name"
+    "num desc";
+  align-items: baseline;
+  padding: clamp(24px, 3.5vw, 40px) 8px;
+  transition: padding-left 0.3s ease, color 0.3s ease;
+}
+
+.service-list a:hover {
+  padding-left: 24px;
+  color: var(--accent);
+}
+
+.service-num {
+  grid-area: num;
+  font-family: var(--font-en);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.service-name {
+  grid-area: name;
+  font-family: var(--font-en);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+  letter-spacing: -0.01em;
+}
+
+.service-desc {
+  grid-area: desc;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* ---------- R&D (dark section) ---------- */
+
+.rd {
+  background: var(--ink);
+  color: #c3ccd4;
+}
+
+.rd-inner {
+  max-width: 1100px;
+}
+
+.rd-text {
+  max-width: 34em;
+  font-size: 1.05rem;
+}
+
+/* ---------- Cases ---------- */
+
+.cases-text {
+  max-width: 34em;
+  font-size: 1.05rem;
+}
+
+/* 提携先ロゴのマーキー（左から右へ流れてループ） */
+.logo-marquee {
+  margin-top: clamp(36px, 5vw, 56px);
+  overflow: hidden;
+}
+
+.logo-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: marquee 45s linear infinite;
+}
+
+.logo-track img {
+  height: clamp(34px, 4.8vw, 50px);
+  width: auto;
+  margin-right: clamp(48px, 6vw, 80px);
+}
+
+.logo-track img.logo-lg {
+  height: clamp(48px, 6.5vw, 70px);
+}
+
+.logo-track img.logo-xl {
+  height: clamp(58px, 7.8vw, 88px);
+}
+
+/* 2セット並べたトラックを半分だけ動かすことで継ぎ目なくループさせる */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- News ---------- */
+
+.news {
+  position: relative;
+  overflow: hidden;
+}
+
+.news::before {
+  content: "";
+  position: absolute;
+  inset: -15%;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 90% at 80% 35%, rgba(48, 176, 199, 0.28) 0%, rgba(48, 176, 199, 0.12) 35%, transparent 70%),
+    radial-gradient(ellipse 65% 100% at 28% 65%, rgba(226, 240, 253, 0.95) 0%, rgba(226, 240, 253, 0.45) 40%, transparent 75%);
+  animation: drift 24s ease-in-out infinite alternate;
+}
+
+.news > * {
+  position: relative;
+  z-index: 1;
+}
+
+.news-list {
+  border-top: 1px solid #c3d8ec;
+  max-width: 880px;
+}
+
+.news .news-list li {
+  border-color: #c3d8ec;
+}
+
+.news-list li {
+  border-bottom: 1px solid var(--line);
+}
+
+.news-list a {
+  display: flex;
+  gap: clamp(16px, 3vw, 40px);
+  align-items: baseline;
+  padding: 22px 4px;
+  transition: color 0.25s ease;
+}
+
+.news-list a:hover {
+  color: var(--accent);
+}
+
+.news-list time {
+  font-family: var(--font-en);
+  font-size: 0.85rem;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.news-list span {
+  font-size: 0.95rem;
+}
+
+/* ---------- Contact CTA ---------- */
+
+.contact-cta {
+  text-align: center;
+  padding-top: clamp(100px, 14vw, 180px);
+  padding-bottom: clamp(100px, 14vw, 180px);
+  background: var(--bg);
+}
+
+.contact-title {
+  font-family: var(--font-en);
+  font-weight: 800;
+  font-size: clamp(2.8rem, 9vw, 7rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent);
+  margin-bottom: 28px;
+}
+
+.contact-text {
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+
+.contact-button {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 18px 64px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.contact-button:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 48px var(--pad-x);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-logo img {
+  height: 24px;
+  width: auto;
+  display: block;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 24px;
+  font-family: var(--font-en);
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.footer-nav a:hover {
+  color: var(--accent);
+}
+
+.copyright {
+  font-family: var(--font-en);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.footer-legal {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-legal a {
+  font-family: var(--font-en);
+  font-size: 0.75rem;
+  color: var(--muted);
+  transition: color 0.25s ease;
+}
+
+.footer-legal a:hover {
+  color: var(--accent);
+}
+
+/* ---------- Sub pages ---------- */
+
+.page-hero {
+  padding: 180px var(--pad-x) 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::before {
+  content: "";
+  position: absolute;
+  inset: -15%;
+  z-index: 0;
+  background:
+    linear-gradient(to bottom, rgba(249, 250, 255, 1) 16%, rgba(249, 250, 255, 0) 40%),
+    radial-gradient(ellipse 55% 90% at 20% 45%, rgba(48, 176, 199, 0.25) 0%, rgba(48, 176, 199, 0.1) 35%, transparent 70%),
+    radial-gradient(ellipse 60% 100% at 75% 40%, rgba(226, 240, 253, 0.9) 0%, rgba(226, 240, 253, 0.4) 40%, transparent 75%);
+}
+
+.page-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.page-title-en {
+  font-family: var(--font-en);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 8vw, 6rem);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.page-title-jp {
+  margin-top: 16px;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.page-section {
+  max-width: 880px;
+  border-top: 1px solid var(--line);
+  padding-top: clamp(56px, 8vw, 96px);
+  padding-bottom: clamp(56px, 8vw, 96px);
+}
+
+.page-section > .section-label {
+  margin-bottom: 16px;
+}
+
+.page-section h2 {
+  font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  margin-bottom: 28px;
+  color: var(--accent);
+}
+
+.page-section p {
+  color: #3a4150;
+}
+
+.page-section .message-lead {
+  font-size: 1.15rem;
+}
+
+#blockchain,
+#ai,
+#wallet-recovery,
+#development,
+#post-quantum,
+#university,
+#academic,
+#ip {
+  position: relative;
+}
+
+.service-side-image {
+  display: none;
+}
+
+@media (min-width: 1240px) {
+  .service-side-image {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 20px);
+    width: clamp(360px, 34vw, 560px);
+    margin: 0;
+    transform: translateY(-50%);
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(ellipse 72% 68% at center, #000 58%, transparent 100%);
+    mask-image: radial-gradient(ellipse 72% 68% at center, #000 58%, transparent 100%);
+  }
+
+  .service-side-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    mix-blend-mode: multiply;
+    opacity: 0.96;
+  }
+
+}
+
+.research-partner-logos {
+  display: none;
+}
+
+@media (min-width: 1240px) {
+  .research-partner-logos {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 20px);
+    width: clamp(360px, 34vw, 560px);
+    height: clamp(165px, 15vw, 235px);
+    margin: 0;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .research-partner-logos img {
+    position: absolute;
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .research-partner-logos .partner-paycle {
+    top: 16%;
+    left: 4%;
+    width: 48%;
+    transform: none;
+  }
+
+  .research-partner-logos .partner-upcx {
+    top: 2%;
+    right: 12%;
+    bottom: auto;
+    left: auto;
+    width: 20%;
+    mix-blend-mode: multiply;
+  }
+
+  .research-partner-logos .partner-nas {
+    right: auto;
+    bottom: 8%;
+    left: 50%;
+    width: 66%;
+    transform: translateX(-50%);
+  }
+}
+
+.conference-collage {
+  display: none;
+}
+
+@media (min-width: 1240px) {
+  .conference-collage {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 20px);
+    width: clamp(340px, 31vw, 510px);
+    height: clamp(430px, 40vw, 600px);
+    margin: 0;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .conference-collage img {
+    position: absolute;
+    display: block;
+    object-fit: cover;
+    border: 5px solid rgba(255, 255, 255, 0.96);
+    border-radius: 4px;
+    box-shadow: 0 16px 36px rgba(23, 23, 24, 0.16);
+  }
+
+  .conference-title {
+    top: 0;
+    left: 3%;
+    z-index: 5;
+    width: 94%;
+    height: 20%;
+    object-fit: cover;
+  }
+
+  .conference-photo-1 {
+    top: 18%;
+    left: 0;
+    z-index: 4;
+    width: 55%;
+    height: 39%;
+    transform: rotate(-2deg);
+  }
+
+  .conference-photo-2 {
+    top: 21%;
+    right: 0;
+    z-index: 3;
+    width: 49%;
+    height: 35%;
+    object-position: 74% center;
+    transform: rotate(2deg);
+  }
+
+  .conference-photo-3 {
+    bottom: 0;
+    left: 5%;
+    z-index: 2;
+    width: 46%;
+    height: 45%;
+    transform: rotate(1.5deg);
+  }
+
+  .conference-photo-4 {
+    right: 1%;
+    bottom: 3%;
+    z-index: 1;
+    width: 53%;
+    height: 43%;
+    transform: rotate(-1.5deg);
+  }
+}
+
+.patent-certificate-fan {
+  display: none;
+}
+
+@media (min-width: 1240px) {
+  .patent-certificate-fan {
+    display: block;
+    position: absolute;
+    top: 42%;
+    left: calc(100% + 20px);
+    width: clamp(360px, 34vw, 560px);
+    height: clamp(390px, 37vw, 570px);
+    margin: 0;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .patent-certificate-fan img {
+    position: absolute;
+    bottom: 2%;
+    display: block;
+    width: 45%;
+    height: auto;
+    aspect-ratio: auto;
+    background: #fff;
+    border: 1px solid rgba(107, 116, 128, 0.18);
+    box-shadow: 0 18px 42px rgba(23, 23, 24, 0.17);
+    transform-origin: 50% 100%;
+  }
+
+  .patent-certificate-fan .patent-singapore {
+    left: 3%;
+    z-index: 3;
+    transform: rotate(-11deg);
+  }
+
+  .patent-certificate-fan .patent-japan {
+    left: 50%;
+    z-index: 2;
+    transform: translateX(-50%);
+  }
+
+  .patent-certificate-fan .patent-malaysia {
+    right: 3%;
+    z-index: 1;
+    transform: rotate(11deg);
+  }
+}
+
+#philosophy {
+  position: relative;
+}
+
+.philosophy-feature-image {
+  height: clamp(220px, 38vw, 340px);
+  margin: 48px calc(var(--pad-x) * -1) 0 0;
+  overflow: hidden;
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.philosophy-feature-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (min-width: 1200px) {
+  .philosophy-feature-image {
+    position: absolute;
+    top: 50%;
+    left: calc(100% - 40px);
+    width: clamp(520px, 46vw, 760px);
+    height: clamp(420px, 42vw, 600px);
+    margin: 0;
+    transform: translateY(-50%);
+    clip-path: polygon(18% 0, 100% 0, 100% 100%, 6% 100%);
+    box-shadow: -24px 28px 60px rgba(23, 23, 24, 0.12);
+  }
+
+  .philosophy-feature-image img {
+    object-position: 54% center;
+  }
+}
+
+.page-section p a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.page-section p a:hover {
+  opacity: 0.6;
+}
+
+#upcx {
+  position: relative;
+}
+
+.upcx-event-showcase {
+  margin: clamp(36px, 6vw, 56px) 0 0;
+  display: grid;
+  gap: 18px;
+}
+
+.event-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 190px;
+  padding: 18px;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  box-shadow: none;
+  isolation: isolate;
+}
+
+.event-card h3 {
+  position: relative;
+  z-index: 2;
+  width: max-content;
+  max-width: 100%;
+  padding: 7px 10px;
+  background: rgba(249, 250, 255, 0.92);
+  border-left: 3px solid var(--accent);
+  border-radius: 3px;
+  color: var(--ink);
+  font-family: var(--font-en);
+  font-size: clamp(0.9rem, 1.7vw, 1.05rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.event-card h3 a {
+  color: inherit;
+}
+
+.event-gallery {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.event-gallery img,
+.event-gallery picture {
+  position: absolute;
+  display: block;
+}
+
+.event-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.event-gallery > img,
+.event-gallery > picture {
+  overflow: hidden;
+  border: 4px solid rgba(255, 255, 255, 0.94);
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.event-gallery > :nth-child(1) {
+  right: 3%;
+  bottom: 8%;
+  width: 64%;
+  height: 68%;
+  transform: rotate(2deg);
+}
+
+.event-card:nth-child(2) .event-gallery > :nth-child(1) {
+  object-position: center top;
+}
+
+.event-gallery > :nth-child(2) {
+  left: 4%;
+  bottom: 12%;
+  width: 42%;
+  height: 48%;
+  transform: rotate(-4deg);
+}
+
+.event-gallery > :nth-child(3) {
+  display: none;
+}
+
+@media (min-width: 1240px) {
+  .upcx-event-showcase {
+    position: absolute;
+    top: 52%;
+    left: calc(100% + 28px);
+    width: clamp(380px, 34vw, 560px);
+    margin: 0;
+    transform: translateY(-50%);
+  }
+
+  .event-card {
+    min-height: clamp(158px, 14.3vw, 220px);
+  }
+
+  .event-card:nth-child(2) {
+    margin-left: clamp(26px, 3vw, 48px);
+  }
+
+  .event-card:nth-child(3) {
+    margin-right: clamp(22px, 2.6vw, 42px);
+  }
+}
+
+/* 下層ページ共通: 番号付きカードリスト（項目数に応じて2〜3カラム） */
+.value-list {
+  margin: 48px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: clamp(24px, 3.5vw, 44px);
+}
+
+.value-list li {
+  border-top: 2px solid var(--ink);
+  padding-top: 22px;
+}
+
+.value-num {
+  display: block;
+  font-family: var(--font-en);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+
+.value-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 10px 0 10px;
+}
+
+/* 英字タイトル＋日本語ラベルの組み合わせ（About PHILOSOPHY）。ラベルと近づける */
+.value-title:has(+ .value-label) {
+  margin-bottom: 4px;
+}
+
+.value-label {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.page-section .value-desc {
+  font-size: 0.92rem;
+}
+
+/* R&D: 国別の取得特許 */
+.patent-list {
+  margin-top: 14px;
+}
+
+.patent-list li {
+  position: relative;
+  border-top: 0;
+  padding: 2px 0 2px 1em;
+  overflow-wrap: anywhere;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.patent-list li::before {
+  content: "・";
+  position: absolute;
+  left: 0;
+}
+
+.patent-list a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.patent-list a:hover {
+  opacity: 0.6;
+}
+
+/* セクション結びの一文: 本文の流れを保ったまま結論を強調 */
+.page-section .section-closing {
+  margin-top: clamp(36px, 5vw, 56px);
+  padding: 8px 0 8px clamp(16px, 2vw, 22px);
+  background: linear-gradient(90deg, rgba(48, 176, 199, 0.045), transparent 72%);
+  border-left: 2px solid rgba(48, 176, 199, 0.65);
+  font-size: 1rem;
+  line-height: 1.9;
+  color: var(--ink);
+}
+
+/* About: 取締役・技術顧問（名前＋役職バッジの罫線リスト） */
+.advisor-list {
+  margin: 48px 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.advisor-list li {
+  display: grid;
+  grid-template-columns: clamp(120px, 15vw, 150px) 1fr;
+  gap: clamp(16px, 2vw, 28px);
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.advisor-head h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.advisor-role {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  color: var(--accent);
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 2px 12px;
+  margin-top: 8px;
+}
+
+.page-section .advisor-desc {
+  font-size: 0.92rem;
+}
+
+.fact-list {
+  margin: 28px 0;
+  border-top: 1px solid var(--line);
+}
+
+/* 企業提携事例: ロゴ付きカード */
+.partner-list {
+  margin: 28px 0;
+  display: grid;
+  gap: 20px;
+}
+
+.partner-list li {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: clamp(20px, 3vw, 36px);
+  align-items: center;
+  padding: clamp(20px, 3vw, 28px);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.partner-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+}
+
+.partner-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* 横長で小さく見えるロゴを拡大表示（枠のサイズは変えず見た目だけ拡大） */
+.partner-logo img.logo-lg {
+  transform: scale(1.3);
+}
+
+.partner-body h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.partner-body p {
+  font-size: 0.95rem;
+}
+
+/* メンバー: 写真付き3列カード（経営陣）＋テキストのみのリスト */
+.member-grid {
+  margin: 28px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 36px);
+}
+
+.member-photo {
+  aspect-ratio: 1 / 1;
+  background: var(--sub);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.member-grid h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.member-grid .member-role {
+  font-family: var(--font-en);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin: 2px 0 10px;
+}
+
+.member-grid p {
+  font-size: 0.9rem;
+}
+
+/* 会社概要: 左に概要表、右に拠点写真の2カラム */
+.company-wide {
+  max-width: 1200px;
+}
+
+.company-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(240px, 28vw, 360px);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: start;
+}
+
+.company-columns .fact-list {
+  margin-top: 0;
+}
+
+.company-photos {
+  display: grid;
+  gap: 28px;
+  margin-top: 28px;
+}
+
+.company-photos figure {
+  margin: 0;
+}
+
+.company-photos img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.company-photos figcaption {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.fact-list > div {
+  display: grid;
+  grid-template-columns: 8.5em 1fr;
+  gap: 16px;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.fact-list dt {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.fact-list dd {
+  font-size: 0.95rem;
+  color: #3a4150;
+}
+
+/* プライバシーポリシー */
+.page-section.policy h2 {
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin: 40px 0 12px;
+}
+
+.policy p {
+  margin-bottom: 8px;
+}
+
+.policy ul {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin: 12px 0;
+  color: #3a4150;
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 768px) {
+  .sp-only {
+    display: inline;
+  }
+
+  .nav-toggle {
+    display: block;
+    position: relative;
+    z-index: 110;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .nav-toggle span {
+    position: absolute;
+    left: 8px;
+    width: 24px;
+    height: 2px;
+    background: var(--ink);
+    transition: transform 0.3s ease, top 0.3s ease;
+  }
+
+  .nav-toggle span:nth-child(1) { top: 15px; }
+  .nav-toggle span:nth-child(2) { top: 23px; }
+
+  body.nav-open .nav-toggle span:nth-child(1) {
+    top: 19px;
+    transform: rotate(45deg);
+  }
+
+  body.nav-open .nav-toggle span:nth-child(2) {
+    top: 19px;
+    transform: rotate(-45deg);
+  }
+
+  .global-nav {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    font-size: 1.3rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  body.nav-open .global-nav {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  body.nav-open {
+    overflow: hidden;
+  }
+
+  .hero-scroll {
+    display: none;
+  }
+
+  .service-list a {
+    grid-template-columns: 2.5em 1fr;
+  }
+
+  .news-list a {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .company-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .member-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .value-list {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .advisor-list li {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .partner-list li {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .partner-logo {
+    height: 56px;
+    justify-content: flex-start;
+  }
+}
