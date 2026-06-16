@@ -1,4 +1,23 @@
 // Scroll reveal
+const photoMotionTargets = [
+  ".event-card",
+  ".usap-event-card",
+  ".service-side-image",
+  ".conference-collage",
+  ".patent-certificate-fan",
+  ".philosophy-feature-image",
+  ".message-portrait",
+  ".company-photos figure",
+  ".member-photo",
+].join(", ");
+
+const photoMotionElements = document.querySelectorAll(photoMotionTargets);
+const sectionMotionElements = document.querySelectorAll(".page-section");
+
+if (photoMotionElements.length || sectionMotionElements.length) {
+  document.body.classList.add("motion-ready");
+}
+
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -12,6 +31,9 @@ const observer = new IntersectionObserver(
 );
 
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+sectionMotionElements.forEach((el) => observer.observe(el));
+photoMotionElements.forEach((el) => observer.observe(el));
 
 // Header background on scroll
 const siteHeader = document.querySelector(".site-header");

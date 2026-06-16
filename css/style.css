@@ -297,6 +297,130 @@ section {
   transform: translateY(0);
 }
 
+.motion-ready .service-side-image,
+.motion-ready .philosophy-feature-image,
+.motion-ready .message-portrait,
+.motion-ready .company-photos figure,
+.motion-ready .member-photo {
+  opacity: 0;
+  transform: translateX(var(--photo-motion-offset, 72px)) var(--photo-rest-transform, translateY(0));
+  transition:
+    opacity 0.72s ease,
+    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: 0.22s;
+  will-change: opacity, transform;
+}
+
+.motion-ready .service-side-image.is-visible,
+.motion-ready .philosophy-feature-image.is-visible,
+.motion-ready .message-portrait.is-visible,
+.motion-ready .company-photos figure.is-visible,
+.motion-ready .member-photo.is-visible {
+  opacity: 1;
+  transform: translateX(0) var(--photo-rest-transform, translateY(0));
+}
+
+.motion-ready .conference-collage img,
+.motion-ready .patent-certificate-fan img {
+  opacity: 0;
+  transform: translateX(var(--photo-motion-offset, 72px)) var(--photo-rest-transform, rotate(0deg));
+  transition:
+    opacity 0.72s ease,
+    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.motion-ready .conference-collage.is-visible img,
+.motion-ready .patent-certificate-fan.is-visible img {
+  opacity: 1;
+  transform: translateX(0) var(--photo-rest-transform, rotate(0deg));
+}
+
+.motion-ready .conference-collage img:nth-of-type(1),
+.motion-ready .patent-certificate-fan img:nth-child(1),
+.motion-ready .company-photos figure:nth-child(1),
+.motion-ready .member-grid li:nth-child(1) .member-photo {
+  transition-delay: 0.22s;
+}
+
+.motion-ready .conference-collage img:nth-of-type(2),
+.motion-ready .patent-certificate-fan img:nth-child(2),
+.motion-ready .company-photos figure:nth-child(2),
+.motion-ready .member-grid li:nth-child(2) .member-photo {
+  transition-delay: 0.36s;
+}
+
+.motion-ready .conference-collage img:nth-of-type(3),
+.motion-ready .patent-certificate-fan img:nth-child(3),
+.motion-ready .member-grid li:nth-child(3) .member-photo {
+  transition-delay: 0.5s;
+}
+
+.motion-ready .conference-collage img:nth-of-type(4) {
+  transition-delay: 0.64s;
+}
+
+.motion-ready .company-photos figure:nth-child(2),
+.motion-ready .member-grid li:nth-child(2) .member-photo {
+  --photo-motion-offset: -72px;
+}
+
+.motion-ready .page-section > .section-label,
+.motion-ready .page-section > h2,
+.motion-ready .page-section > p,
+.motion-ready .page-section > .value-list,
+.motion-ready .page-section > .fact-list,
+.motion-ready .page-section > .partner-list,
+.motion-ready .page-section > .advisor-list,
+.motion-ready .page-section > .member-grid,
+.motion-ready .page-section > .text-link,
+.motion-ready .page-section > .section-closing,
+.motion-ready .page-section > .company-columns {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.motion-ready .page-section.is-visible > .section-label,
+.motion-ready .page-section.is-visible > h2,
+.motion-ready .page-section.is-visible > p,
+.motion-ready .page-section.is-visible > .value-list,
+.motion-ready .page-section.is-visible > .fact-list,
+.motion-ready .page-section.is-visible > .partner-list,
+.motion-ready .page-section.is-visible > .advisor-list,
+.motion-ready .page-section.is-visible > .member-grid,
+.motion-ready .page-section.is-visible > .text-link,
+.motion-ready .page-section.is-visible > .section-closing,
+.motion-ready .page-section.is-visible > .company-columns {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.motion-ready .page-section > h2 {
+  transition-delay: 0.06s;
+}
+
+.motion-ready .page-section > p {
+  transition-delay: 0.12s;
+}
+
+.motion-ready .page-section > .value-list,
+.motion-ready .page-section > .fact-list,
+.motion-ready .page-section > .partner-list,
+.motion-ready .page-section > .member-grid,
+.motion-ready .page-section > .company-columns {
+  transition-delay: 0.18s;
+}
+
+.motion-ready .page-section > .advisor-list,
+.motion-ready .page-section > .section-closing,
+.motion-ready .page-section > .text-link {
+  transition-delay: 0.24s;
+}
+
 /* ---------- Intro ---------- */
 
 .intro-text {
@@ -655,13 +779,14 @@ section {
 
 @media (min-width: 1240px) {
   .service-side-image {
+    --photo-rest-transform: translateY(-50%);
     display: block;
     position: absolute;
     top: 50%;
     left: calc(100% + 20px);
     width: clamp(360px, 34vw, 560px);
     margin: 0;
-    transform: translateY(-50%);
+    transform: var(--photo-rest-transform);
     pointer-events: none;
     -webkit-mask-image: radial-gradient(ellipse 72% 68% at center, #000 58%, transparent 100%);
     mask-image: radial-gradient(ellipse 72% 68% at center, #000 58%, transparent 100%);
@@ -773,40 +898,48 @@ section {
   }
 
   .conference-photo-1 {
+    --photo-motion-offset: -72px;
+    --photo-rest-transform: rotate(-2deg);
     top: 18%;
     left: 0;
     z-index: 4;
     width: 55%;
     height: 39%;
-    transform: rotate(-2deg);
+    transform: var(--photo-rest-transform);
   }
 
   .conference-photo-2 {
+    --photo-motion-offset: 72px;
+    --photo-rest-transform: rotate(2deg);
     top: 21%;
     right: 0;
     z-index: 3;
     width: 49%;
     height: 35%;
     object-position: 74% center;
-    transform: rotate(2deg);
+    transform: var(--photo-rest-transform);
   }
 
   .conference-photo-3 {
+    --photo-motion-offset: -72px;
+    --photo-rest-transform: rotate(1.5deg);
     bottom: 0;
     left: 5%;
     z-index: 2;
     width: 46%;
     height: 45%;
-    transform: rotate(1.5deg);
+    transform: var(--photo-rest-transform);
   }
 
   .conference-photo-4 {
+    --photo-motion-offset: 72px;
+    --photo-rest-transform: rotate(-1.5deg);
     right: 1%;
     bottom: 3%;
     z-index: 1;
     width: 53%;
     height: 43%;
-    transform: rotate(-1.5deg);
+    transform: var(--photo-rest-transform);
   }
 }
 
@@ -841,21 +974,27 @@ section {
   }
 
   .patent-certificate-fan .patent-singapore {
+    --photo-motion-offset: -72px;
+    --photo-rest-transform: rotate(-11deg);
     left: 3%;
     z-index: 3;
-    transform: rotate(-11deg);
+    transform: var(--photo-rest-transform);
   }
 
   .patent-certificate-fan .patent-japan {
+    --photo-motion-offset: 0;
+    --photo-rest-transform: translateX(-50%);
     left: 50%;
     z-index: 2;
-    transform: translateX(-50%);
+    transform: var(--photo-rest-transform);
   }
 
   .patent-certificate-fan .patent-malaysia {
+    --photo-motion-offset: 72px;
+    --photo-rest-transform: rotate(11deg);
     right: 3%;
     z-index: 1;
-    transform: rotate(11deg);
+    transform: var(--photo-rest-transform);
   }
 }
 
@@ -884,13 +1023,14 @@ section {
 
 @media (min-width: 1200px) {
   .philosophy-feature-image {
+    --photo-rest-transform: translateY(-50%);
     position: absolute;
     top: 50%;
     left: calc(100% - 40px);
     width: clamp(520px, 46vw, 760px);
     height: clamp(420px, 42vw, 600px);
     margin: 0;
-    transform: translateY(-50%);
+    transform: var(--photo-rest-transform);
     clip-path: polygon(18% 0, 100% 0, 100% 100%, 6% 100%);
     box-shadow: -24px 28px 60px rgba(23, 23, 24, 0.12);
   }
@@ -941,13 +1081,14 @@ section {
 
 @media (min-width: 1200px) {
   .message-portrait {
+    --photo-rest-transform: translateY(-50%);
     position: absolute;
     top: 50%;
     left: calc(100% + 56px);
     width: clamp(260px, 21vw, 350px);
     height: clamp(360px, 31vw, 460px);
     margin: 0;
-    transform: translateY(-50%);
+    transform: var(--photo-rest-transform);
     box-shadow: -18px 28px 60px rgba(23, 23, 24, 0.12);
   }
 }
@@ -1036,11 +1177,13 @@ section {
 }
 
 .event-gallery > :nth-child(1) {
+  --case-photo-offset: 72px;
+  --case-rest-transform: rotate(2deg);
   right: 3%;
   bottom: 8%;
   width: 64%;
   height: 68%;
-  transform: rotate(2deg);
+  transform: var(--case-rest-transform);
 }
 
 .event-card:nth-child(2) .event-gallery > :nth-child(1) {
@@ -1048,15 +1191,50 @@ section {
 }
 
 .event-gallery > :nth-child(2) {
+  --case-photo-offset: -72px;
+  --case-rest-transform: rotate(-4deg);
   left: 4%;
   bottom: 12%;
   width: 42%;
   height: 48%;
-  transform: rotate(-4deg);
+  transform: var(--case-rest-transform);
 }
 
 .event-gallery > :nth-child(3) {
   display: none;
+}
+
+.cases-page.motion-ready .event-gallery > img,
+.cases-page.motion-ready .event-gallery > picture,
+.cases-page.motion-ready .usap-event-gallery img {
+  opacity: 0;
+  transform: translateX(var(--case-photo-offset, 72px)) var(--case-rest-transform, rotate(0deg));
+  transition:
+    opacity 0.72s ease,
+    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.cases-page.motion-ready .event-card.is-visible .event-gallery > img,
+.cases-page.motion-ready .event-card.is-visible .event-gallery > picture,
+.cases-page.motion-ready .usap-event-card.is-visible .usap-event-gallery img {
+  opacity: 1;
+  transform: translateX(0) var(--case-rest-transform, rotate(0deg));
+}
+
+.cases-page.motion-ready .event-gallery > :nth-child(1),
+.cases-page.motion-ready .usap-event-gallery img:nth-child(1) {
+  transition-delay: 0.22s;
+}
+
+.cases-page.motion-ready .event-gallery > :nth-child(2),
+.cases-page.motion-ready .usap-event-gallery img:nth-child(2) {
+  transition-delay: 0.38s;
+}
+
+.cases-page.motion-ready .event-gallery > :nth-child(3),
+.cases-page.motion-ready .usap-event-gallery img:nth-child(3) {
+  transition-delay: 0.54s;
 }
 
 @media (min-width: 1240px) {
@@ -1142,30 +1320,36 @@ section {
 }
 
 .usap-event-gallery img:nth-child(1) {
+  --case-photo-offset: 72px;
+  --case-rest-transform: rotate(2deg);
   right: 1%;
   bottom: 4%;
   z-index: 1;
   width: 52%;
   height: 78%;
-  transform: rotate(2deg);
+  transform: var(--case-rest-transform);
 }
 
 .usap-event-gallery img:nth-child(2) {
+  --case-photo-offset: -72px;
+  --case-rest-transform: rotate(-3deg);
   left: 2%;
   bottom: 10%;
   z-index: 2;
   width: 48%;
   height: 48%;
-  transform: rotate(-3deg);
+  transform: var(--case-rest-transform);
 }
 
 .usap-event-gallery img:nth-child(3) {
+  --case-photo-offset: -72px;
+  --case-rest-transform: rotate(1.5deg);
   left: 18%;
   top: 16%;
   z-index: 3;
   width: 48%;
   height: 42%;
-  transform: rotate(1.5deg);
+  transform: var(--case-rest-transform);
 }
 
 @media (min-width: 1240px) {
@@ -1184,6 +1368,49 @@ section {
 
   .usap-event-card {
     min-height: clamp(220px, 19vw, 300px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready .page-section > .section-label,
+  .motion-ready .page-section > h2,
+  .motion-ready .page-section > p,
+  .motion-ready .page-section > .value-list,
+  .motion-ready .page-section > .fact-list,
+  .motion-ready .page-section > .partner-list,
+  .motion-ready .page-section > .advisor-list,
+  .motion-ready .page-section > .member-grid,
+  .motion-ready .page-section > .text-link,
+  .motion-ready .page-section > .section-closing,
+  .motion-ready .page-section > .company-columns {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .motion-ready .service-side-image,
+  .motion-ready .philosophy-feature-image,
+  .motion-ready .message-portrait,
+  .motion-ready .company-photos figure,
+  .motion-ready .member-photo {
+    opacity: 1;
+    transform: var(--photo-rest-transform, translateY(0));
+    transition: none;
+  }
+
+  .motion-ready .conference-collage img,
+  .motion-ready .patent-certificate-fan img {
+    opacity: 1;
+    transform: var(--photo-rest-transform, rotate(0deg));
+    transition: none;
+  }
+
+  .cases-page.motion-ready .event-gallery > img,
+  .cases-page.motion-ready .event-gallery > picture,
+  .cases-page.motion-ready .usap-event-gallery img {
+    opacity: 1;
+    transform: var(--case-rest-transform, rotate(0deg));
+    transition: none;
   }
 }
 
