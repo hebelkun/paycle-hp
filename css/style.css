@@ -990,7 +990,9 @@ section {
 
 @media (max-width: 768px) {
   .conference-collage {
-    display: block;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
     margin: clamp(32px, 8vw, 48px) 0 0;
     overflow: hidden;
     border: 1px solid var(--line);
@@ -999,6 +1001,7 @@ section {
   }
 
   .conference-title {
+    grid-column: 1 / -1;
     padding: 14px 16px;
     background: rgba(249, 250, 255, 0.98);
     border-left: 3px solid var(--accent);
@@ -1009,16 +1012,12 @@ section {
     line-height: 1.2;
   }
 
-  .conference-collage img:not(.conference-mobile-photo) {
-    display: none;
-  }
-
   .conference-collage img {
     position: static;
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
     border: 0;
     border-radius: 0;
@@ -1026,8 +1025,14 @@ section {
     transform: none;
   }
 
+  .conference-collage img:first-of-type,
+  .conference-collage .conference-mobile-photo {
+    grid-column: 1 / -1;
+  }
+
   .conference-collage .conference-mobile-photo {
     display: block;
+    aspect-ratio: 16 / 10;
   }
 
   .motion-ready .conference-collage img {
