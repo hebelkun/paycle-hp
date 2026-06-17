@@ -1025,14 +1025,12 @@ section {
     transform: none;
   }
 
-  .conference-collage img:first-of-type,
-  .conference-collage .conference-mobile-photo {
+  .conference-collage img:first-of-type {
     grid-column: 1 / -1;
   }
 
   .conference-collage .conference-mobile-photo {
     display: block;
-    aspect-ratio: 16 / 10;
   }
 
   .motion-ready .conference-collage img {
