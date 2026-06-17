@@ -910,6 +910,25 @@ section {
   }
 }
 
+@media (max-width: 1239px) {
+  .research-partner-logos {
+    display: block;
+    max-width: min(360px, 78vw);
+    margin: clamp(28px, 8vw, 44px) auto 0;
+  }
+
+  .research-partner-logos .partner-paycle,
+  .research-partner-logos .partner-upcx {
+    display: none;
+  }
+
+  .research-partner-logos .partner-nas {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
 .conference-collage {
   display: none;
 }
