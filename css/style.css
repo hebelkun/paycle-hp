@@ -984,7 +984,7 @@ section {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1239px) {
   .conference-collage {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1026,10 +1026,12 @@ section {
   }
 
   .motion-ready .conference-collage img {
-    transform: translateY(22px);
+    opacity: 1;
+    transform: none;
   }
 
   .motion-ready .conference-collage.is-visible img {
+    opacity: 1;
     transform: none;
   }
 }
