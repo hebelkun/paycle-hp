@@ -437,50 +437,91 @@ section {
 }
 
 .service-list {
-  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 24px);
 }
 
 .service-list li {
-  border-bottom: 1px solid var(--line);
+  min-height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(48, 176, 199, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 14px 38px rgba(23, 23, 24, 0.05);
+  transition:
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.32s ease,
+    box-shadow 0.32s ease,
+    background 0.32s ease;
+}
+
+.service-list li:hover {
+  transform: translateY(-10px);
+  border-color: rgba(48, 176, 199, 0.48);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 28px 70px rgba(48, 176, 199, 0.16);
 }
 
 .service-list a {
-  display: grid;
-  grid-template-columns: 3.5em 1fr;
-  grid-template-areas:
-    "num name"
-    "num desc";
-  align-items: baseline;
-  padding: clamp(24px, 3.5vw, 40px) 8px;
-  transition: padding-left 0.3s ease, color 0.3s ease;
+  position: relative;
+  min-height: clamp(240px, 24vw, 340px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(22px, 3vw, 34px);
+  transition: color 0.3s ease;
+}
+
+.service-list a::before {
+  content: "";
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 72px;
+  height: 72px;
+  border: 1px solid rgba(48, 176, 199, 0.26);
+  border-radius: 8px;
+  transform: rotate(10deg);
+  transition: transform 0.32s ease, background 0.32s ease;
 }
 
 .service-list a:hover {
-  padding-left: 24px;
-  color: var(--accent);
+  color: var(--ink);
+}
+
+.service-list li:hover a::before {
+  background: rgba(48, 176, 199, 0.1);
+  transform: rotate(0deg) scale(1.08);
 }
 
 .service-num {
-  grid-area: num;
   font-family: var(--font-en);
   font-size: 0.8rem;
   font-weight: 500;
-  color: var(--muted);
+  color: var(--accent);
 }
 
 .service-name {
-  grid-area: name;
+  margin-top: auto;
   font-family: var(--font-en);
   font-weight: 700;
   font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+  line-height: 1.08;
   letter-spacing: -0.01em;
 }
 
 .service-desc {
-  grid-area: desc;
   font-size: 0.9rem;
   color: var(--muted);
-  margin-top: 6px;
+  margin-top: 18px;
+  padding-right: 42px;
+}
+
+@media (max-width: 1080px) {
+  .service-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 /* ---------- R&D (dark section) ---------- */
@@ -943,6 +984,56 @@ section {
   }
 }
 
+@media (max-width: 768px) {
+  .conference-collage {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin: clamp(32px, 8vw, 48px) 0 0;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #fff;
+  }
+
+  .conference-title {
+    grid-column: 1 / -1;
+    padding: 14px 16px;
+    background: rgba(249, 250, 255, 0.98);
+    border-left: 3px solid var(--accent);
+    color: var(--ink);
+    font-family: var(--font-en);
+    font-size: 0.95rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .conference-collage img {
+    position: static;
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .conference-collage img:first-of-type {
+    grid-column: 1 / -1;
+  }
+
+  .motion-ready .conference-collage img {
+    transform: translateY(22px);
+  }
+
+  .motion-ready .conference-collage.is-visible img {
+    transform: none;
+  }
+}
+
 .patent-certificate-fan {
   display: none;
 }
@@ -1371,6 +1462,94 @@ section {
   }
 }
 
+@media (max-width: 768px) {
+  .cases-page .upcx-event-showcase,
+  .cases-page .usap-visual-showcase {
+    margin-top: clamp(32px, 8vw, 48px);
+    gap: 18px;
+  }
+
+  .cases-page .event-card,
+  .cases-page .usap-event-card,
+  .cases-page .usap-logo-panel {
+    min-height: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+
+  .cases-page .event-card h3,
+  .cases-page .usap-event-card h3 {
+    width: auto;
+    margin: 0;
+    padding: 14px 16px;
+    background: rgba(249, 250, 255, 0.98);
+    border-left: 3px solid var(--accent);
+    border-radius: 0;
+  }
+
+  .cases-page .event-gallery,
+  .cases-page .usap-event-gallery {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .cases-page .event-gallery > img,
+  .cases-page .event-gallery > picture,
+  .cases-page .event-gallery > :nth-child(3),
+  .cases-page .usap-event-gallery img {
+    position: static;
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    transform: none;
+    border: 0;
+    border-radius: 4px;
+    box-shadow: none;
+  }
+
+  .cases-page .event-gallery img,
+  .cases-page .event-gallery picture img,
+  .cases-page .usap-event-gallery img {
+    position: static;
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transform: none;
+  }
+
+  .cases-page .event-gallery > :first-child,
+  .cases-page .usap-event-gallery img:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .cases-page .usap-logo-panel {
+    min-height: 96px;
+    padding: 18px;
+  }
+
+  .cases-page .usap-logo-panel img {
+    width: min(54%, 180px);
+  }
+
+  .cases-page.motion-ready .event-gallery > img,
+  .cases-page.motion-ready .event-gallery > picture,
+  .cases-page.motion-ready .usap-event-gallery img,
+  .cases-page.motion-ready .event-card.is-visible .event-gallery > img,
+  .cases-page.motion-ready .event-card.is-visible .event-gallery > picture,
+  .cases-page.motion-ready .usap-event-card.is-visible .usap-event-gallery img {
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .motion-ready .page-section > .section-label,
   .motion-ready .page-section > h2,
@@ -1772,7 +1951,11 @@ section {
   }
 
   .service-list a {
-    grid-template-columns: 2.5em 1fr;
+    min-height: 220px;
+  }
+
+  .service-list {
+    grid-template-columns: 1fr;
   }
 
   .news-list a {
